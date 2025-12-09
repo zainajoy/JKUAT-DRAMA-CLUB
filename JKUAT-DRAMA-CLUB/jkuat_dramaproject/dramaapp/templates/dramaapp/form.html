@@ -1,0 +1,11 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <form action="POST" method="post" >
+        {% csrf_token %}
+        {{ form }}
+        <INPut type="submit" value="Submit"></INPut>
+    </form>
+</div>
+{% endblock %}

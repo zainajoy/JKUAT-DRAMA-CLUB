@@ -1,0 +1,129 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+  body {
+    background: #000;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .stage-hero {
+    background: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1800&q=80') no-repeat center center/cover;
+    min-height: 90vh;
+    padding: 4rem 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+  }
+
+  .btn-gold {
+    background: linear-gradient(90deg, #f7d07a, #c59a34);
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 2rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    width: 180px;
+  }
+
+  .btn-outline-gold {
+    border: 2px solid #c59a34;
+    color: #f7d07a;
+    border-radius: 8px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    width: 180px;
+    background: transparent;
+  }
+
+  .big-red-btn {
+    margin-top: 3rem;
+    background: #e50914;
+    padding: 1.2rem 3rem;
+    border-radius: 10px;
+    font-size: 2rem;
+    font-weight: 700;
+    width: fit-content;
+  }
+
+  nav.section-nav {
+    background: black;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #e50914;
+    margin-bottom: 2rem;
+  }
+
+  nav.section-nav a {
+    color: white;
+    text-decoration: none;
+  }
+
+  nav.section-nav a.active {
+    border-bottom: 2px solid #e50914;
+    padding-bottom: 0.3rem;
+  }
+
+  .gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 2rem 4rem;
+  }
+
+  .gallery-container img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+</style>
+
+
+<div class="stage-hero">
+  <div class="dark-overlay"></div>
+  <div class="hero-content">
+    <h1 class="fw-bold display-4 mb-4">DRAMA CLUB</h1>
+
+    <a href="{% url 'login' %}" class="btn btn-gold">SIGN IN</a><br>
+    <a href="{% url 'login' %}" class="btn btn-outline-gold">LOG IN</a>
+
+    <button class="big-red-btn mt-4">JOIN THE CLUB</button>
+  </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,129 @@
+{% extends "main.html" %}
+{% block content %}
+
+<style>
+  /* Full-page theatre background from Pexels */
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  body {
+    background: url("https://www.pexels.com/photo/dramatic-red-curtains-on-stage-with-lighting-29138258/") no-repeat center center fixed;
+    background-size: cover;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  /* Overlay so text is readable on top of the image */
+  .page-overlay {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65));
+    display: flex;
+    align-items: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+  }
+
+  .card-wrap {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    color: #fff;
+  }
+
+  .main-title {
+    font-size: 56px;
+    font-weight: 900;
+    text-align: center;
+    color: #ffd54d;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    text-shadow: 4px 4px 18px rgba(0,0,0,0.8);
+  }
+
+  .styled-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 22px;
+    border-left: 6px solid #ffd54d;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .sub-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffe8b3;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .lead {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #f7f2e6;
+  }
+
+  .contact-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .btn-custom {
+    padding: 10px 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 10px;
+    box-shadow: 3px 6px 18px rgba(0,0,0,0.6);
+    font-size: 16px;
+  }
+
+  /* Make sure it remains readable on small screens */
+  @media (max-width: 576px) {
+    .main-title { font-size: 34px; }
+    .sub-title { font-size: 20px; }
+    .styled-card { padding: 18px; }
+  }
+</style>
+
+<div class="page-overlay">
+  <div class="card-wrap">
+
+    <h1 class="main-title">JKUAT Drama Club</h1>
+
+    <!-- About -->
+    <div class="styled-card">
+      <h2 class="sub-title">About Us</h2>
+      <p class="lead">
+        JKUAT Drama Club is a creative student collective dedicated to storytelling through theatre,
+        film, spoken word, music and cultural showcases. We nurture acting, directing, writing,
+        stagecraft and film production — bringing powerful, imaginative performances to life.
+      </p>
+      <p class="lead">
+        Join us to learn, collaborate and perform — whether you’re a stage actor, filmmaker or
+        backstage technician, there’s a place for your talent here.
+      </p>
+    </div>
+
+    <!-- Contact -->
+    <div class="styled-card">
+      <h2 class="sub-title">Contact Us</h2>
+
+      <p class="lead"><strong>Phone:</strong> +123 456 7890</p>
+      <p class="lead"><strong>Email:</strong> jkuatdrama@example.com</p>
+
+      <div class="contact-row">
+        <a href="https://chat.whatsapp.com/IQtDHMPsMv2E5xwOVmnHcq" class="btn btn-success btn-custom" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.instagram.com/jkuatdramaclub?igsh=YzljYTk1ODg3Zg==" class="btn btn-danger btn-custom" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/@jkuatdramaclub4492?si=UbNs2QlRK9Gg3d0x" class="btn btn-dark btn-custom" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
