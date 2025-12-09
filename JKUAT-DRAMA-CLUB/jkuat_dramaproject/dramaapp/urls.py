@@ -7,6 +7,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('homepage',views.homepage,name='homepage'),
+    path('dashboard',views.dashboard,name='dashboard'),
     path('productions',views.productions,name='productions'),
     path('events',views.events,name='events'),
     path('contacts',views.contacts,name='contacts'),

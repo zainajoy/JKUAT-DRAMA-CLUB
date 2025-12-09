@@ -28,3 +28,12 @@ class gallery(models.Model):
 
     def __str__(self):
         return self.title
+class payments(models.Model):
+    member = models.ForeignKey(member, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    phone_number = models.CharField(max_length=15)
+    mpese_receipt_number = models.CharField(max_length=50, null=True, blank=True)
+    date_paid = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.member.name} - {self.amount}"         

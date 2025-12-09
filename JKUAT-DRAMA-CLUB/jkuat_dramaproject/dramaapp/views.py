@@ -24,6 +24,9 @@ def events(request):
 def gallery(request):
     context = {}
     return render(request,'dramaapp/gallery.html', context)
+def dashboard(request):
+    context = {}
+    return render(request,'dramaapp/dashboard.html', context)   
 
 
 def login(request):
