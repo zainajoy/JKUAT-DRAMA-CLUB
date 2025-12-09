@@ -10,7 +10,8 @@ def homepage(request):
     context = {}
     return render(request,'dramaapp/homepage.html', context)
 def home(request):
-    context = {}
+    members = member.objects.all()
+    context={"members":members}
     return render(request,'dramaapp/home.html', context)
 def contacts(request):
     context = {}
@@ -76,10 +77,7 @@ def creategallery(request):
 
     return render(request, "dramaapp/form.html", context )
     
-def read_ALL_member(request):
-    members = member.objects.all()
-    context={"members":members}
-    return render(request,"dramaapp/home.html",context)
+
 def update_member(request, pk):
     members_obj = member.objects.get(id=pk)
     form = memberForm(instance=members_obj)
@@ -142,6 +140,9 @@ def delete_gallery(request, pk):
         return redirect("read_gallery")
     context={"gallery":galleries_obj}
     return render(request, "dramaapp/delete.html",context=context)
+def mpesapayment(request):
+    context = {}
+    return render(request,'dramaapp/mpesapayment.html', context)
 
 
 def signup_view(request):
@@ -159,3 +160,15 @@ def signup_view(request):
     else:
         form = SignUpForm()
     return render(request, 'dramaapp/signny.html', {'form': form})
+    from django_daraja.mpesa.core import MpesaClient
+
+def index(request):
+    cl = MpesaClient()
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    phone_number = '07xxxxxxxx'
+    amount = 1
+    account_reference = 'reference'
+    transaction_desc = 'Description'
+    callback_url = 'https://api.darajambili.com/express-payment'
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)

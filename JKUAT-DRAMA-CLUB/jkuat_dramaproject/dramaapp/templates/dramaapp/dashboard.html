@@ -1,4 +1,4 @@
-{% extends "extend.html" %}
+{% extends "main.html" %}
 {% load static %}
 
 {% block title %}Drama Club Dashboard{% endblock %}
@@ -8,32 +8,36 @@
 
     <!-- Welcome & Membership Status -->
     <div class="row mb-4">
+       
         <div class="col-md-8">
+             
             <div class="alert alert-success rounded-4 p-4 shadow-lg">
                 <h4 class="mb-2">Welcome, {{ member.name }}!</h4>
-                <p class="mb-0">Member since {{ member.member_since }}.</p>
+                <p class="mb-0">welcome to our beautful drama club.</p>
             </div>
+            
         </div>
-        <div class="col-md-4">
+       
+         <div class="col-md-4">
             <div class="card shadow-lg rounded-4 p-3 text-center">
                 <h5>Membership Status</h5>
                 {% if member.membership_paid %}
                     <span class="badge bg-success p-2">Paid</span>
                 {% else %}
                     <span class="badge bg-danger p-2">Unpaid</span>
-                    <a href="{% url 'pay_fee' %}" class="btn btn-primary btn-sm mt-2">Pay Registration Fee</a>
+                    <a href="{% url 'mpesapayment' %}" class="btn btn-primary btn-sm mt-2">Pay Registration Fee</a>
                 {% endif %}
             </div>
         </div>
-    </div>
-
+       
+    </div>  
     <!-- Profile & Gallery -->
     <div class="row mb-4">
         <div class="col-md-4 mb-3">
             <div class="card text-center shadow-lg rounded-4 p-3">
                 <img src="https://i.pravatar.cc/150?img=12" class="rounded-circle mx-auto mb-3" width="120" height="120" alt="Member">
                 <h4>{{ member.name }}</h4>
-                <a href="{% url 'update_profile' %}" class="btn btn-primary btn-sm mt-2">Update Profile</a>
+                
             </div>
         </div>
 

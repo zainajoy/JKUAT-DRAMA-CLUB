@@ -6,7 +6,7 @@ class member (models.Model): # name of the table
     name = models.CharField(max_length=200) # strings with a max length in character of 200
     course = models.CharField(max_length=255) # strings with a max length in character of 255
     department = models.CharField(max_length=255) # strings with a max length in character of 255
-    photo = models.ImageField(upload_to='members.html', blank=True) # image field for member photos
+    photo = models.ImageField(upload_to='member-photos/', blank=True) # image field for member photos
     phonenumber = models.CharField(max_length=15,null=True,blank=True) # strings with a max length in character of 15
     date_joined = models.DateField(auto_now_add=True) # date field
     def __str__(self):
