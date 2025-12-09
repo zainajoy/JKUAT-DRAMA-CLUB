@@ -1,10 +1,10 @@
 {% extends "main.html" %}
 {% block content %}
 
-{% for member in members %}
+{%for member in members%}
     <div class="member-profile">
-        <h2>{{ member.name }}</h2>
-        <p>{{ member.Registrationnumber }}</p>
+        <h2>{{ member.name}}</h2>
+        <p>{{ member.registrationnumber }}</p>
         <p>{{ member.course }}</p>
          <p>{{ member.department }}</p>
         <p>{{ member.photo}}</p>
@@ -15,7 +15,7 @@
 
 </div>
     
-{% endfor %}
+{%endfor%}
 
 
 {% endblock %}

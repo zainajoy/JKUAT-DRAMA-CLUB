@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% block content %} 
+<form action="", method="post">
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="phonenumber" class="form-label">Phone Number</label>
+    <input type="text" class="form-control" id="phonenumber" name="phonenumber" aria-describedby="phoneHelp" class="form-text">we will send you a prompt to complete the payment.
+    <div id="phoneHelp" class="form-text">We'll never share your phone number with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="amount" class="form-label">Amount</label>
+    <input type="number" class="form-control" id="amount" name="amount">
+  </div>
+
+  <button type="submit" class="btn btn-primary">pay</button>
+</form>
+{% endblock %}
