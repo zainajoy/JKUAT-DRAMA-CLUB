@@ -1,0 +1,93 @@
+{% extends "extend.html" %}
+{% load static %}
+
+{% block title %}Drama Club Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- Welcome & Membership Status -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="alert alert-success rounded-4 p-4 shadow-lg">
+                <h4 class="mb-2">Welcome, {{ member.name }}!</h4>
+                <p class="mb-0">Member since {{ member.member_since }}.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg rounded-4 p-3 text-center">
+                <h5>Membership Status</h5>
+                {% if member.membership_paid %}
+                    <span class="badge bg-success p-2">Paid</span>
+                {% else %}
+                    <span class="badge bg-danger p-2">Unpaid</span>
+                    <a href="{% url 'pay_fee' %}" class="btn btn-primary btn-sm mt-2">Pay Registration Fee</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile & Gallery -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-lg rounded-4 p-3">
+                <img src="https://i.pravatar.cc/150?img=12" class="rounded-circle mx-auto mb-3" width="120" height="120" alt="Member">
+                <h4>{{ member.name }}</h4>
+                <a href="{% url 'update_profile' %}" class="btn btn-primary btn-sm mt-2">Update Profile</a>
+            </div>
+        </div>
+
+        <div class="col-md-8 mb-3">
+            <div class="card shadow-lg rounded-4 p-3">
+                <h5 class="mb-4"><i class="bi bi-camera-video"></i> Gallery Preview</h5>
+                <div class="row g-3">
+                    {% for img in gallery_images %}
+                    <div class="col-6 col-md-3">
+                        <img src="{{ img }}" class="img-fluid rounded gallery-img" alt="Performance">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Events -->
+    <div class="card shadow-lg rounded-4 p-3 mb-4">
+        <h5 class="mb-3"><i class="bi bi-calendar-event"></i> Upcoming Events</h5>
+        <ul class="list-group list-group-flush">
+            {% for event in upcoming_events %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ event.title }}
+                <span class="badge bg-primary rounded-pill">{{ event.date }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Club Contacts -->
+    <div class="card shadow-lg rounded-4 p-3">
+        <h5 class="mb-3"><i class="bi bi-telephone-fill"></i> Club Contacts</h5>
+        <a href="https://chat.whatsapp.com/IQtDHMPsMv2E5xwOVmnHcq" class="btn btn-success btn-custom" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.instagram.com/jkuatdramaclub?igsh=YzljYTk1ODg3Zg==" class="btn btn-danger btn-custom" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/@jkuatdramaclub4492?si=UbNs2QlRK9Gg3d0x" class="btn btn-dark btn-custom" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+
+</div>
+
+<style>
+    body {
+        background: linear-gradient(to right, #fceabb, #f8b500);
+    }
+    .card:hover {
+        transform: scale(1.02);
+        transition: 0.3s;
+    }
+    .gallery-img {
+        transition: transform 0.3s;
+    }
+    .gallery-img:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
