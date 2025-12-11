@@ -1,17 +1,33 @@
 {% extends "main.html" %}
 {% block content %} 
-<form action="", method="post">
-    {% csrf_token %}
-  <div class="mb-3">
-    <label for="phonenumber" class="form-label">Phone Number</label>
-    <input type="text" class="form-control" id="phonenumber" name="phonenumber" aria-describedby="phoneHelp" class="form-text">we will send you a prompt to complete the payment.
-    <div id="phoneHelp" class="form-text">We'll never share your phone number with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="amount" class="form-label">Amount</label>
-    <input type="number" class="form-control" id="amount" name="amount">
-  </div>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Payment Form</h3>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="phonenumber" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" id="phonenumber" name="phonenumber" aria-describedby="phoneHelp" placeholder="+1 234 567 890">
+              <div id="phoneHelp" class="form-text">We will send you a prompt to complete the payment.</div>
+            </div>
 
-  <button type="submit" class="btn btn-primary">pay</button>
-</form>
+            <div class="mb-3">
+              <label for="amount" class="form-label">Amount</label>
+              <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Pay Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container bg-dark text-light">
+    {{ response }}
+  </div>
+</div>
 {% endblock %}
+                  

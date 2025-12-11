@@ -1,17 +1,18 @@
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import member , event , gallery
-from .forms import memberForm ,eventForm  ,galleryForm,SignUpForm
+from .models import Member , Event
+from .forms import memberForm ,eventForm ,SignUpForm
 from django.contrib import messages
+from django_daraja.mpesa.core import MpesaClient
 
 # Create your views here.
 def homepage(request):
     context = {}
     return render(request,'dramaapp/homepage.html', context)
 def home(request):
-    members = member.objects.all()
-    context={"members":members}
+    members = Member.objects.all()
+    context={"member":members}
     return render(request,'dramaapp/home.html', context)
 def contacts(request):
     context = {}
@@ -19,29 +20,28 @@ def contacts(request):
 def productions(request):
     context = {}
     return render(request,'dramaapp/productions.html', context)
-def events(request):
+def event(request):
     context = {}
-    return render(request,'dramaapp/events.html', context)  
+    return render(request,'dramaapp/event.html', context)  
 def gallery(request):
     context = {}
     return render(request,'dramaapp/gallery.html', context)
+
+
 def dashboard(request):
+   
     context = {}
-    return render(request,'dramaapp/dashboard.html', context)   
+    
+    return render(request, 'dramaapp/dashboard.html', context)
+
+       
 
 
 def login(request):
     context = {}
     return render(request,'dramaapp/login.html', context)       
-def home(request):
-    context = {}
-    return render(request,'dramaapp/home.html', context)
-def productions(request):
-    context = {}
-    return render(request,'dramaapp/productions.html', context)
-def gallery(request):
-    context = {}
-    return render(request,'dramaapp/gallery.html', context)
+
+
 def createmember(request):
     form = memberForm()
     context = {"form":form}
@@ -53,6 +53,29 @@ def createmember(request):
             return redirect("home")            
 
     return render(request, "dramaapp/form.html", context )
+def readALLmember(request):
+    members = Member.objects.all()
+    context={"members": members}
+    return render(request,"dramaapp/home.html",context)
+def update_member(request, pk):
+    member_obj = Member.objects.get(id=pk)
+    form = memberForm(request.POST or None, request.FILES or None, instance=member_obj)
+
+    if form.is_valid():
+        form.save()
+        return redirect("home")
+
+    return render(request, "dramaapp/update.html", {"form": form})
+
+    
+def delete_member(request, pk):
+    member_obj = Member.objects.get(id=pk)
+    member_obj.delete()
+    return redirect("home")
+
+
+
+
 
 def createevent(request):
     form = eventForm()
@@ -65,42 +88,12 @@ def createevent(request):
             return redirect("home")            
 
     return render(request, "dramaapp/form.html", context )
-def creategallery(request):
-    form = galleryForm()
-    context = {"form":form}
-
-    if request.method == "POST":
-        form = galleryForm(request.POST)
-        if form.is_valid(): 
-            form.save()
-            return redirect("home")            
-
-    return render(request, "dramaapp/form.html", context )
-    
-
-def update_member(request, pk):
-    members_obj = member.objects.get(id=pk)
-    form = memberForm(instance=members_obj)
-    if request.method == "POST":
-        form = memberForm(request.POST,request.FILES, instance=members_obj)
-        if form.is_valid(): 
-            form.save()
-            return redirect("read_ALL_member")            
-    context ={"form":form}
-    return render(request, "dramaapp/form.html", context)
-def delete_member(request, pk):
-    members_obj = member.objects.get(id=pk)
-    if request.method == "POST":        
-        members_obj.delete()
-        return redirect("home")
-    context={"member":members_obj}
-    return render(request, "dramaapp/delete.html",context=context)
-
+         
 
 def read_event(request):
     events = event.objects.all()
-    context={"events":events}
-    return render(request,"dramaapp/events.html",context)
+    context={"event":events}
+    return render(request,"dramaapp/event.html",context)
 def update_event(request, pk):
     events_obj = event.objects.get(id=pk)
     form = eventForm(instance=events_obj)
@@ -119,30 +112,7 @@ def delete_event(request, pk):
     context={"event":events_obj}
     return render(request, "dramaapp/delete.html",context=context)
 
-def read_gallery(request):
-    galleries = gallery.objects.all()
-    context={"galleries":galleries}
-    return render(request,"dramaapp/gallery.html",context)
-def update_gallery(request, pk):
-    galleries_obj = gallery.objects.get(id=pk)
-    form = galleryForm(instance=galleries_obj)
-    if request.method == "POST":
-        form = galleryForm(request.POST,request.FILES, instance=galleries_obj)
-        if form.is_valid(): 
-            form.save()
-            return redirect("read_gallery")            
-    context ={"form":form}
-    return render(request, "dramaapp/form.html", context)
-def delete_gallery(request, pk):
-    galleries_obj = gallery .objects.get(id=pk)
-    if request.method == "POST":        
-        galleries_obj.delete()
-        return redirect("read_gallery")
-    context={"gallery":galleries_obj}
-    return render(request, "dramaapp/delete.html",context=context)
-def mpesapayment(request):
-    context = {}
-    return render(request,'dramaapp/mpesapayment.html', context)
+
 
 
 def signup_view(request):
@@ -160,15 +130,37 @@ def signup_view(request):
     else:
         form = SignUpForm()
     return render(request, 'dramaapp/signny.html', {'form': form})
-    from django_daraja.mpesa.core import MpesaClient
+
+def logout_user(request):
+    logout(request)
+    return redirect('homepage')
+    
 
 def index(request):
-    cl = MpesaClient()
+   
     # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
-    phone_number = '07xxxxxxxx'
-    amount = 1
-    account_reference = 'reference'
-    transaction_desc = 'Description'
-    callback_url = 'https://api.darajambili.com/express-payment'
-    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    # = '07xxxxxxxx'
+   # amount = 1
+   # account_reference = 'reference'
+#transaction_desc = 'Description'
+   # callback_url = 'https://api.darajambili.com/express-payment'
+   # response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
     return HttpResponse(response)
+def mpesapayment(request):
+    cl = MpesaClient()
+    accountReference = "REGISTRATION FEE"
+    transactionDesc = "DRAMA CLUB PAYMENT"
+    callbackUrl = "https://api.darajambili.com/express-payment"
+
+    if request.method == "POST":
+        phoneNumber = request.POST.get('phonenumber')
+        amount=request.POST.get('amount') # Convert to int
+
+        response = cl.stk_push(
+            phoneNumber,amount,accountReference,transactionDesc,callbackUrl)
+
+        context = {"response": response}
+        return render(request, "dramaapp/mpesapayments.html", context)
+
+    else:
+        return render(request, "dramaapp/mpesapayment.html")

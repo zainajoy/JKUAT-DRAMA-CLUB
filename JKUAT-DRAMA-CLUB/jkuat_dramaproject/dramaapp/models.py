@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class member (models.Model): # name of the table 
+class Member (models.Model): # name of the table 
     registrationnumber = models.CharField(max_length=20,primary_key=True) # strings with a max length in character of 20
     name = models.CharField(max_length=200) # strings with a max length in character of 200
     course = models.CharField(max_length=255) # strings with a max length in character of 255
@@ -12,7 +12,7 @@ class member (models.Model): # name of the table
     def __str__(self):
         return self.name
     
-class event(models.Model):
+class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     poster = models.ImageField(upload_to='events/', blank=True)
@@ -21,19 +21,5 @@ class event(models.Model):
 
     def __str__(self):
         return self.title
-class gallery(models.Model):
-    title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='gallery/')
-    description = models.TextField(blank=True)
 
-    def __str__(self):
-        return self.title
-class payments(models.Model):
-    member = models.ForeignKey(member, on_delete=models.CASCADE)
-    amount = models.IntegerField()
-    phone_number = models.CharField(max_length=15)
-    mpese_receipt_number = models.CharField(max_length=50, null=True, blank=True)
-    date_paid = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.member.name} - {self.amount}"         
+         

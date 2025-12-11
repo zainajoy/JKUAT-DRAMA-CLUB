@@ -1,21 +1,31 @@
 {% extends "main.html" %}
+{% load static %}
 {% block content %}
 
-{%for member in members%}
-    <div class="member-profile">
-        <h2>{{ member.name}}</h2>
-        <p>{{ member.registrationnumber }}</p>
-        <p>{{ member.course }}</p>
-         <p>{{ member.department }}</p>
-        <p>{{ member.photo}}</p>
-        <p>{{ member.phonenumber }}</p>
-        <a href="{% url 'updatemember' member.id %}">Edit</a>
-        <a href="{% url 'deletemember' member.id %}" class="text-decoration-none text-dark badge bg-warning">Delete</a>
+{% for member in members %}
+<div class="member-profile card p-3 mb-3 shadow-sm">
 
+    <!-- Display Member Photo -->
+    {% if member.photo %}
+        <img src="{{ member.photo.url }}" 
+             alt="{{ member.name }}" 
+             class="img-thumbnail mb-3" 
+             style="width:150px; height:150px; object-fit:cover;">
+    {% else %}
+        <!-- Default placeholder -->
+        <img src="https://via.placeholder.com/150" 
+             class="img-thumbnail mb-3"
+             style="width:150px; height:150px; object-fit:cover;">
+    {% endif %}
+
+    <h3>{{ member.name }}</h3>
+    <p>Reg No: {{ member.registrationnumber }}</p>
+    <p>Course: {{ member.course }}</p>
+    <p>Department: {{ member.department }}</p>
+    <p>Phone: {{ member.phonenumber }}</p>
 
 </div>
-    
-{%endfor%}
-
+{% endfor %}
 
 {% endblock %}
+

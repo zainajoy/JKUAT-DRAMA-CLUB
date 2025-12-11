@@ -1,7 +1,15 @@
-<h2>Update member</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
-</form>
-<a href="{% url 'read-ALLmember' %}">Back to Home</a>               
+{% extends "main.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Update Member</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </form>
+</div>
+
+{% endblock %}

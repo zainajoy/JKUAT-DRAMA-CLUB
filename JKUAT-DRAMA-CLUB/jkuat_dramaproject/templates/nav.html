@@ -1,31 +1,30 @@
-
-<nav class="navbar navbar-expand-lg bg-body-bg dark" bg-warning data-bs-theme="light" >
+<nav class="navbar navbar-expand-lg" style="background-color: black;">
   <div class="container-fluid">
-    <a class="navbar-brand text-white fw-bold" href="homepage">homepage</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="homepage" style="color: white; font-weight: bold;">homepage</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+        aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active text-white fw-bold" aria-current="page" href="home">Home</a>
+          <a class="nav-link active" aria-current="page" href="home" 
+             style="color: white; font-weight: bold;">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fw-bold" href="contacts">ABOUT US</a>
+          <a class="nav-link" href="productions" style="color: white; font-weight: bold;">Productions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fw-bold" href="events">EVENTS</a>
+          <a class="nav-link" href="contacts" style="color: white; font-weight: bold;">Aboout us</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item text-black fw-bold" href="gallery">GALLERY</a></li>
-            <li><a class="dropdown-item text-black fw-bold" href="productions"> PRODUCTION</a></li>
-          </ul>
+       
         </li>
       </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>
